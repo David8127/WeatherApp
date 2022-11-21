@@ -1,41 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="./assets/style.css"/>
-    <title>Weather Application</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="./assets/style.css" />
+  <title>Weather Application</title>
 </head>
+
 <body>
   <header class="text-center bg-light p-3">
     <h1> <span>🌎</span> Weather Dashboard <span>⛅</span></h1>
+    <h4>Today is <span id="today"></span></h4>
   </header>
   <!-- not sure if this first container is active -->
-  <div class="container-fluid"> 
+  <div class="container-fluid">
     <div class="col float-left m-2 p-2 col-2">
       <div class="container-fluid bg-info p-2">
         <h3>Search for a City</h3>
-        <input
-        type="text"
-        placeholder = "City Name"
-        id="cityInput"          
-        />
+        <input id="cityInput" type="text" />
         <button class="mt-2" id="searchBtn">Search</button>
       </div>
-      <div class="container p-2" id="searchHistory">
+      <div class="container p-2" id="history">
         <h5>Search History:</h5>
-        <div class="row">
-          <div class="col m-2">col</div>
+        <div id=cities class="row">
+          <div class="col m-2"></div>
           <div class="w-100"></div>
-          <div class="col m-2">col</div>
+          <div class="col m-2"></div>
           <div class="w-100"></div>
-          <div class="col m-2">col</div>
+          <div class="col m-2"></div>
           <div class="w-100"></div>
-          <div class="col m-2">col</div>
+          <div class="col m-2"></div>
           <div class="w-100"></div>
-          <div class="col m-2">col</div>
+          <div class="col m-2"></div>
           <div class="w-100"></div>
         </div>
       </div>
@@ -45,11 +44,11 @@
         <div class="col" id="day1">
           <div class="card">
             <ul class="list-group list-group-flush">
-              <li class="list-group-item weatherDate">date 1</li>
-              <li class="list-group-item weatherIcon">A second item</li>
-              <li class="list-group-item weatherTemp">A third item</li>
-              <li class="list-group-item weatherWind">A forth item</li>
-              <li class="list-group-item weatherHumidity">A fifth item</li>
+              <li class="list-group-item" id="weatherDate1">Date: </li>
+              <li class="list-group-item weatherIcon1"></li>
+              <li class="list-group-item weatherTemp1">Temp: </li>
+              <li class="list-group-item weatherWind1">Wind Speed: </li>
+              <li class="list-group-item weatherHumidity1">Humidity: </li>
             </ul>
           </div>
         </div>
@@ -63,55 +62,55 @@
         <div class="col" id="day2">
           <div class="card">
             <ul class="list-group list-group-flush">
-              <li class="list-group-item weatherDate">date 2</li>
-              <li class="list-group-item weatherIcon">A second item</li>
-              <li class="list-group-item weatherTemp">A third item</li>
-              <li class="list-group-item weatherWind">A forth item</li>
-              <li class="list-group-item weatherHumidity">A fifth item</li>
+              <li class="list-group-item" id="weatherDate2">Date: </li>
+              <li class="list-group-item weatherIcon2"></li>
+              <li class="list-group-item weatherTemp2">Temp: </li>
+              <li class="list-group-item weatherWind2">Wind Speed: </li>
+              <li class="list-group-item weatherHumidity2">Humidity: </li>
             </ul>
           </div>
         </div>
         <div class="col" id="day3">
           <div class="card">
             <ul class="list-group list-group-flush">
-              <li class="list-group-item weatherDate">date 3</li>
-              <li class="list-group-item weatherIcon">A second item</li>
-              <li class="list-group-item weatherTemp">A third item</li>
-              <li class="list-group-item weatherWind">A forth item</li>
-              <li class="list-group-item weatherHumidity">A fifth item</li>
+              <li class="list-group-item" id="weatherDate3">Date: </li>
+              <li class="list-group-item weatherIcon3"></li>
+              <li class="list-group-item weatherTemp3">Temp: </li>
+              <li class="list-group-item weatherWind3">Wind Speed: </li>
+              <li class="list-group-item weatherHumidity3">Humidity: </li>
             </ul>
           </div>
         </div>
         <div class="col" id="day4">
           <div class="card">
             <ul class="list-group list-group-flush">
-              <li class="list-group-item weatherDate">date 4</li>
-              <li class="list-group-item weatherIcon">A second item</li>
-              <li class="list-group-item weatherTemp">A third item</li>
-              <li class="list-group-item weatherWind">A forth item</li>
-              <li class="list-group-item weatherHumidity">A fifth item</li>
+              <li class="list-group-item" id="weatherDate4">Date: </li>
+              <li class="list-group-item weatherIcon4"></li>
+              <li class="list-group-item weatherTemp4">Temp: </li>
+              <li class="list-group-item weatherWind4">Wind Speed: </li>
+              <li class="list-group-item weatherHumidity4">Humidity: </li>
             </ul>
           </div>
         </div>
         <div class="col" id="day5">
           <div class="card">
             <ul class="list-group list-group-flush">
-              <li class="list-group-item weatherDate">date 5</li>
-              <li class="list-group-item weatherIcon">A second item</li>
-              <li class="list-group-item weatherTemp">A third item</li>
-              <li class="list-group-item weatherWind">A forth item</li>
-              <li class="list-group-item weatherHumidity">A fifth item</li>
+              <li class="list-group-item" id="weatherDate5">Date: </li>
+              <li class="list-group-item weatherIcon5"></li>
+              <li class="list-group-item weatherTemp5">Temp: </li>
+              <li class="list-group-item weatherWind5">Wind Speed: </li>
+              <li class="list-group-item weatherHumidity5">Humidity: </li>
             </ul>
           </div>
         </div>
         <div class="col" id="day6">
           <div class="card">
             <ul class="list-group list-group-flush">
-              <li class="list-group-item weatherDate">date 6</li>
-              <li class="list-group-item weatherIcon">A second item</li>
-              <li class="list-group-item weatherTemp">A third item</li>
-              <li class="list-group-item weatherWind">A forth item</li>
-              <li class="list-group-item weatherHumidity">A fifth item</li>
+              <li class="list-group-item" id="weatherDate6">Date: </li>
+              <li class="list-group-item weatherIcon6"></li>
+              <li class="list-group-item weatherTemp6">Temp: </li>
+              <li class="list-group-item weatherWind6">Wind Speed: </li>
+              <li class="list-group-item weatherHumidity6">Humidity: </li>
             </ul>
           </div>
         </div>
@@ -121,6 +120,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
-  <script src="./assets/index.js"></script>
+  <script type = "text/JavaScript" src = "https://momentjs.com/downloads/moment.min.js"></script>
+  <script src="./assets/new.js"></script>
 </body>
+
 </html>
