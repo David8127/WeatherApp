@@ -57,11 +57,11 @@ async function currentWeather() {
     var currentCard = document.getElementById("currently")
     currentCard.innerHTML = `
         <ul class = "list-group">
-        <li class = "weatherDate">Current Report:</li>
-        <li class = "temp">Temp: ${weatherNow.temp}\u00B0F</li>
-        <li class = "wind"> Wind Speed(mph): ${weatherNow.wind_speed} </li>
-        <li class = "humidity">Humidity: ${weatherNow.humidity} </li>
-        <p> </p>
+        <li class = "weatherDate list-group-item">Current Report:</li>
+        <li class = "description list-group-item">${weatherNow.weather[0].description} ${generateIcons(weatherNow.weather[0].main)}</li>
+        <li class = "temp list-group-item">Temp: ${weatherNow.temp}\u00B0F</li>
+        <li class = "wind list-group-item"> Wind Speed: ${weatherNow.wind_speed} mph</li>
+        <li class = "humidity list-group-item">Humidity: ${weatherNow.humidity} </li>
         </ul>
         `
 }
@@ -72,18 +72,37 @@ async function displayForcast() {
     for (let i = 1; i < 6; i++) {
         weatherCard[i].innerHTML = `
             <ul class = "list-group">
-                <li class = "weatherDate"></li>
-                <li class = "temp">Temp: ${futureCast[i].temp.day}\u00B0F</li>
-                <li class = "wind"> Wind Speed(mph): ${futureCast[i].wind_speed} </li>
-                <li class = "humidity">Humidity: ${futureCast[i].humidity} </li>
-                <p> </p>
+                <li class = "weatherDate list-group-item"> </li>
+                <li class = "description list-group-item text-center">${futureCast[i].weather[0].description} ${generateIcons(futureCast[i].weather[0].main)} </li>
+                <li class = "temp list-group-item">Temp: ${futureCast[i].temp.day}\u00B0F</li>
+                <li class = "wind list-group-item"> Wind Speed: ${futureCast[i].wind_speed}mph </li>
+                <li class = "humidity list-group-item">Humidity: ${futureCast[i].humidity} </li>
             </ul>
             `
     }
     showDates();
 };
 
-// generateIcons()
+function generateIcons(weather) {
+    switch (weather) {
+        case "Atmosphere":
+            return '🌫';
+        case "Clear":
+            return '🌞';
+        case "Clouds":
+            return '☁';
+        case "Drizzle":
+            return '🌦';
+        case "Rain":
+            return '🌧';
+        case "Snow":
+            return '🌨';
+        case "Thunderstorm":
+            return '⛈';
+        default: ''
+            break;
+    }
+}
 
 function showDates() {
     //Populating the dates:

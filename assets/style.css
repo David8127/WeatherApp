@@ -1,0 +1,23 @@
+body {
+    background-image: url(./images/sky-background.jpg);
+    background-size: cover;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+}
+
+/* header {
+    
+} */
+#searchBox{
+    background-color: rgba(19, 19, 155, 0.733);
+}
+
+h2 {
+    background-color: rgba(19, 19, 155, 0.733);
+    color: aliceblue;
+}
+
+/* p::first-letter {
+    text-transform:capitalize;
+} */
