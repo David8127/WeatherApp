@@ -6,18 +6,21 @@ body {
     margin: 0;
 }
 
-/* header {
-    
-} */
-#searchBox{
-    background-color: rgba(19, 19, 155, 0.733);
+h2, #searchBox {
+    border-radius: 15px;
+    background-color: #054484;
+    color: white;
 }
 
-h2 {
-    background-color: rgba(19, 19, 155, 0.733);
-    color: aliceblue;
+li {
+    border-width: 30px;
+    border-color: rgba(40, 47, 51, 0.911);
 }
 
-/* p::first-letter {
+li::first-letter {
     text-transform:capitalize;
-} */
+}
+
+.weatherDate {
+    background-color: rgba(0, 123, 255, 0.253) ;
+}

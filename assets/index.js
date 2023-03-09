@@ -21,6 +21,7 @@ function today() {
 }
 
 function searchCity(city, limit = 5) {
+    addToHistory(city)
     var requestURL = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${apikey}`
     fetch(requestURL)
         .then(function (res) {
@@ -32,8 +33,10 @@ function searchCity(city, limit = 5) {
             var lon = data[0].lon;
             var lat = data[0].lat;
             searchWeatherByLatLon(lat, lon);
+        })
+        .catch(error => {
+            alert(`Couldn't find that city`)
         });
-
 };
 
 
@@ -53,10 +56,50 @@ function searchWeatherByLatLon(lat, lon) {
         });
 };
 
+
+var previousSearchHistory = localStorage.getItem('history')
+if (previousSearchHistory) {
+    previousSearchHistory = JSON.parse(previousSearchHistory)
+} else {
+    previousSearchHistory = []
+}
+
+function addToHistory(city) {
+    // creates new item in local storage
+    var searchHistory = localStorage.getItem('history')
+    if (searchHistory) {
+        searchHistory = JSON.parse(searchHistory)
+        for (var i = 0; i < searchHistory.length; i++) {
+            if (searchHistory[i] === city) {
+                return ''
+            }
+        }
+        searchHistory.push(city)
+        localStorage.setItem('history', JSON.stringify(searchHistory))
+    } else {
+        searchHistory = [city]
+        localStorage.setItem('history', JSON.stringify(searchHistory))
+    }
+
+    for (var i = 0; i < searchHistory.length; i++) {
+        var historyBtn = document.createElement('button')
+        var historyCity = searchHistory[i]
+        historyBtn.textContent = historyCity
+        historyBtn.addEventListener('click', function (event) {
+            searchCity(event.target.textContent)
+        })
+        var historySection = document.getElementById('history')
+        var buttonContainer = document.createElement('p')
+        buttonContainer.appendChild(historyBtn)
+        historySection.appendChild(buttonContainer)
+    }
+};
+
+
 async function currentWeather() {
     var currentCard = document.getElementById("currently")
     currentCard.innerHTML = `
-        <ul class = "list-group">
+        <ul class = "list-group text-center">
         <li class = "weatherDate list-group-item">Current Report:</li>
         <li class = "description list-group-item">${weatherNow.weather[0].description} ${generateIcons(weatherNow.weather[0].main)}</li>
         <li class = "temp list-group-item">Temp: ${weatherNow.temp}\u00B0F</li>
@@ -71,7 +114,7 @@ async function displayForcast() {
     var weatherCard = document.getElementsByClassName("card");
     for (let i = 1; i < 6; i++) {
         weatherCard[i].innerHTML = `
-            <ul class = "list-group">
+            <ul class = "list-group text-center">
                 <li class = "weatherDate list-group-item"> </li>
                 <li class = "description list-group-item text-center">${futureCast[i].weather[0].description} ${generateIcons(futureCast[i].weather[0].main)} </li>
                 <li class = "temp list-group-item">Temp: ${futureCast[i].temp.day}\u00B0F</li>
@@ -102,7 +145,8 @@ function generateIcons(weather) {
         default: ''
             break;
     }
-}
+};
+
 
 function showDates() {
     //Populating the dates:
@@ -115,13 +159,6 @@ function showDates() {
 searchBtn.on("click", function () {
     var inputVal = inputEl.val();
     searchCity(inputVal);
-
-    // document.getElementById("weatherDate1").textContent = moment().format("ddd, MMM Do");
-    // document.getElementById("weatherDate2").textContent = moment().add(1, 'd').format("ddd, MMM Do");
-    // document.getElementById("weatherDate3").textContent = moment().add(2, 'd').format("ddd, MMM Do");
-    // document.getElementById("weatherDate4").textContent = moment().add(3, 'd').format("ddd, MMM Do");
-    // document.getElementById("weatherDate5").textContent = moment().add(4, 'd').format("ddd, MMM Do");
-    // document.getElementById("weatherDate6").textContent = moment().add(5, 'd').format("ddd, MMM Do");
 })
 
 today();

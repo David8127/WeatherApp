@@ -11,27 +11,26 @@
 </head>
 
 <body>
-  <header class="text-center bg-light p-3">
+  <header class="text-center p-3">
     <h1> <span>🌎</span> Weather Dashboard <span>⛅</span></h1>
     <h4>Today is <span id="today"> </span></h4>
   </header>
-  <!-- not sure if this first container is active -->
   <div class="container-fluid">
-    <div class="col float-left m-2 p-2 col-2">
+    <div class="col-3 float-left m-2 p-2 col-2">
       <div class="container-fluid p-2" id="searchBox">
         <h3>Search for a City</h3>
         <input id="cityInput" type="text" placeholder="e.g. Seattle" />
-        <button class="mt-2" id="searchBtn">Search</button>
+        <button type="button" class="btn btn-light m-1" id="searchBtn">Search</button>
       </div>
-      <div class="container p-2" id="history">
+      <div class="container p-2" >
         <h5>Search History:</h5>
-        <div id=cities class="row">
-          <div class="col m-2"></div>
-          <div class="w-100"></div>
+        <div id="history">
+          <!-- <div class="col m-2"></div>
+          <div class="w-100"></div> -->
         </div>
       </div>
     </div>
-    <div class="col-9 m-2 p-2 float-right" id="weatherData" >
+    <div class="col-8 m-2 p-2 float-right font-weight-bold" id="weatherData" >
       <div class="row">
         <div class="col" id="day1">
           <div class="card" id="currently" >
@@ -40,7 +39,7 @@
       </div>
       <div class="row">
         <div class="col pt-2">
-          <h2 class = "text-center">5-Day Forecast:</h4>
+          <h2 class = "text-center">5-Day Forecast</h4>
         </div>
       </div>
       <div class="row pt-3">
