@@ -2,7 +2,7 @@
 
 ## Description
 
-Weather forecasts allow people to plan out their day and prepare for the week ahead of them. This application allows the user to quickly and easily look up the current and future weather conditions of any city around the world. It retreives up-to-date and accurate data from a server-side api and translates it to an easily navigable webpage. 
+Weather forecasts allow people to plan out their day and prepare for the week ahead of them. This application allows the user to quickly and easily look up the current and future weather conditions of any city around the world. It retreives up-to-date and accurate data from a server-side api and translates it to an easily navigable webpage. If you are going on a trip to multiple locations, use this weather dashboard to help plan accordingly for weather events or to figure out what kind of clothing you might need to pack.
 
 ## User Story
 
@@ -23,6 +23,6 @@ The following image shows the web application's appearance and functionality:
 
 ## Links 
 
-Deployed Application -
+Deployed Application - https://david8127.github.io/WeatherApp/
 
 My Github - https://github.com/David8127
