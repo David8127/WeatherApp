@@ -1,9 +1,10 @@
 var inputEl = $("#cityInput");
 var searchBtn = $("#searchBtn");
 var currentDay = moment().format("dddd, MMM Do, YYYY");
+var apikey;
+//variables for collected weather data
 var weatherNow;
 var futureCast;
-var apikey;
 
 function getApiKey() {
     var keyHash = "cysFzulTAZ_IHud4mXm6S";
@@ -16,10 +17,18 @@ function getApiKey() {
 
 getApiKey();
 
+//triggers weather data search for city inputted by user
+searchBtn.on("click", function () {
+    var inputVal = inputEl.val();
+    searchCity(inputVal);
+})
+
+//get today's date and render it at the top of the page
 function today() {
     document.getElementById("today").textContent = moment().format("dddd, MMMM Do");
 }
 
+//uses api to get latitude and longitude coodrdinates of searched city
 function searchCity(city, limit = 5) {
     addToHistory(city)
     var requestURL = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${apikey}`
@@ -28,8 +37,6 @@ function searchCity(city, limit = 5) {
             return res.json();
         })
         .then(function (data) {
-            console.log(data);
-            cityName = data[0].local_names.en
             var lon = data[0].lon;
             var lat = data[0].lat;
             searchWeatherByLatLon(lat, lon);
@@ -39,7 +46,7 @@ function searchCity(city, limit = 5) {
         });
 };
 
-
+//get the weather data for the searched city based on its lat & lon
 function searchWeatherByLatLon(lat, lon) {
     var requestURL = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely&appid=${apikey}&units=imperial`;
     fetch(requestURL)
@@ -48,11 +55,12 @@ function searchWeatherByLatLon(lat, lon) {
         })
         .then(function (data) {
             console.log(data)
+            //current and projected weather data assigned to variables
             weatherNow = data.current;
             futureCast = data.daily;
-            console.log(weatherNow);
+            //functions that take in the data and display it
             currentWeather();
-            displayForcast();
+            displayForecast();
         });
 };
 
@@ -64,11 +72,13 @@ if (previousSearchHistory) {
     previousSearchHistory = []
 }
 
+//add searched cities to local storage and create history for each
 function addToHistory(city) {
-    // creates new item in local storage
+    //analyzes local storage history; creates new items in local storage
     var searchHistory = localStorage.getItem('history')
     if (searchHistory) {
         searchHistory = JSON.parse(searchHistory)
+        //loop though array, dont add city to history that's already been searched
         for (var i = 0; i < searchHistory.length; i++) {
             if (searchHistory[i] === city) {
                 return ''
@@ -80,7 +90,8 @@ function addToHistory(city) {
         searchHistory = [city]
         localStorage.setItem('history', JSON.stringify(searchHistory))
     }
-
+    //creates button for each unique city name
+    //each button can be clicked again to search for that city's data
     for (var i = 0; i < searchHistory.length; i++) {
         var historyBtn = document.createElement('button')
         var historyCity = searchHistory[i]
@@ -95,7 +106,7 @@ function addToHistory(city) {
     }
 };
 
-
+//displays current weather in the inputted area 
 async function currentWeather() {
     var currentCard = document.getElementById("currently")
     currentCard.innerHTML = `
@@ -109,8 +120,8 @@ async function currentWeather() {
         `
 }
 
-async function displayForcast() {
-    // console.log("You searched for the forcast of", cityName);
+//displays the five-day forecast
+async function displayForecast() {
     var weatherCard = document.getElementsByClassName("card");
     for (let i = 1; i < 6; i++) {
         weatherCard[i].innerHTML = `
@@ -126,6 +137,7 @@ async function displayForcast() {
     showDates();
 };
 
+//lists icons based on general weather description from API data
 function generateIcons(weather) {
     switch (weather) {
         case "Atmosphere":
@@ -147,7 +159,7 @@ function generateIcons(weather) {
     }
 };
 
-
+//display dates for the 5-day forecast
 function showDates() {
     //Populating the dates:
     var dateDisplay = $(".weatherDate");
@@ -155,10 +167,5 @@ function showDates() {
         dateDisplay[i].textContent = moment().add([i], 'd').format("ddd, MMM Do");
     }
 }
-
-searchBtn.on("click", function () {
-    var inputVal = inputEl.val();
-    searchCity(inputVal);
-})
 
 today();
