@@ -31,7 +31,7 @@ function today() {
 //uses api to get latitude and longitude coodrdinates of searched city
 function searchCity(city, limit = 5) {
     addToHistory(city)
-    var requestURL = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${apikey}`
+    var requestURL = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${apikey}`
     fetch(requestURL)
         .then(function (res) {
             return res.json();
